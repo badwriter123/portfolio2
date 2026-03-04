@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Sora, Oswald } from "next/font/google";
 import "./globals.css";
+import { ClientLayout } from "@/components/client-layout";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -84,10 +85,13 @@ export default function RootLayout({
           </svg>
         </div>
         
-        {/* Main content with relative positioning */}
-        <div className="relative" style={{ zIndex: 10 }}>
-          {children}
-        </div>
+        {/* Matrix rain - fixed behind everything */}
+        <ClientLayout>
+          {/* Main content with relative positioning */}
+          <div className="relative" style={{ zIndex: 10 }}>
+            {children}
+          </div>
+        </ClientLayout>
       </body>
     </html>
   );

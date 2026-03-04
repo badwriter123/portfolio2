@@ -11,6 +11,7 @@ import { ScrollingSection } from '@/components/scrolling-section';
 
 import { SocialsSection } from '@/components/socials-section';
 import { Footer } from '@/components/footer';
+import { SectionReveal } from '@/components/section-reveal';
 import { motion } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 
@@ -25,11 +26,21 @@ export default function Home() {
       <CommandBar />
       <ScrollProgress />
       <HeroSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <SkillsSection />
-      <SocialsSection />
-      <ScrollingSection />
+      <SectionReveal>
+        <ProjectsSection />
+      </SectionReveal>
+      <SectionReveal>
+        <ExperienceSection />
+      </SectionReveal>
+      <SectionReveal>
+        <SkillsSection />
+      </SectionReveal>
+      <SectionReveal>
+        <SocialsSection />
+      </SectionReveal>
+      <SectionReveal>
+        <ScrollingSection />
+      </SectionReveal>
       
       {/* Scroll to top arrow */}
       <div className="relative">

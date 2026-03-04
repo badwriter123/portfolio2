@@ -129,3 +129,45 @@
     100% { transform: translateX(100%); }
   }
 }
+
+/* CRT Monitor Effects */
+.crt-screen {
+  position: relative;
+  overflow: hidden;
+  animation: crt-flicker 8s infinite;
+}
+
+.crt-scanlines {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.crt-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 80px rgba(0, 255, 0, 0.06),
+    inset 0 0 20px rgba(0, 255, 0, 0.04),
+    0 0 30px rgba(0, 255, 0, 0.03);
+  z-index: 11;
+}
+
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  3% { opacity: 0.97; }
+  6% { opacity: 1; }
+  7.5% { opacity: 0.95; }
+  9% { opacity: 1; }
+}
