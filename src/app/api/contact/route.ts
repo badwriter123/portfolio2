@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100),
@@ -27,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: 'Contact Form <noreply@yourdomain.com>', // Replace with your domain
       to: ['your-email@example.com'], // Replace with your email
       subject: `Portfolio Contact: ${validatedData.subject}`,
@@ -77,7 +80,7 @@ ${validatedData.message}
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid form data', details: error.errors },
+        { error: 'Invalid form data', details: error.issues },
         { status: 400 }
       );
     }

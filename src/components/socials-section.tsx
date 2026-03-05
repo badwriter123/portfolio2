@@ -1000,9 +1000,17 @@ function MiniWaveform({ inView }: { inView: boolean }) {
 
 /* ── Throughput mini-graph (sparkline) ── */
 function ThroughputGraph({ inView }: { inView: boolean }) {
-  const [points, setPoints] = useState<number[]>(() =>
-    Array.from({ length: 20 }, () => Math.random() * 60 + 20)
+  const [points, setPoints] = useState<number[]>(
+    () => Array.from({ length: 20 }, () => 50)
   );
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      setPoints(Array.from({ length: 20 }, () => Math.random() * 60 + 20));
+    }
+  }, []);
 
   useEffect(() => {
     if (!inView) return;

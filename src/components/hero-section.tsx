@@ -1,25 +1,15 @@
 'use client';
 
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 export function HeroSection() {
   // Boot sequence
   const [bootLines, setBootLines] = useState<string[]>([]);
   const [bootComplete, setBootComplete] = useState(false);
   const [showHero, setShowHero] = useState(false);
-
-  // Scroll fade
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
 
   // 3D tilt
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -37,14 +27,14 @@ export function HeroSection() {
   const [displayText, setDisplayText] = useState(['', '', '', '', '', '']);
 
   const command = '--info';
-  const lines = [
+  const lines = useMemo(() => [
     "I build [Backend_Systems], Scalable_API's,",
     "leverage_AI() to ship_10x_faster();",
     "From distributed_systems, to payment_Infra",
     "I'm here to orchestrate.",
     "My AI-augmented workflows deliver fast MVP's.",
     "Finally, sudo rm -rf --> BOOM !!!"
-  ];
+  ], []);
 
   // ════════════════════════════════════
   // Boot Sequence
@@ -155,8 +145,7 @@ export function HeroSection() {
   }, [currentChar, currentLine, lines, commandExecuted]);
 
   return (
-    <div ref={sectionRef} className="relative h-[200vh]">
-    <section id="hero" className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Ambient Gradient Orbs - stays visible on scroll */}
       <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
         <motion.div
@@ -205,11 +194,7 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Scroll-fading content wrapper */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-      >
+      <div className="absolute inset-0 flex items-center justify-center">
 
       {/* ═══ Boot Sequence ═══ */}
       <AnimatePresence>
@@ -732,8 +717,7 @@ export function HeroSection() {
         </>
       )}
 
-      </motion.div>
+      </div>
     </section>
-    </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MessageSquare, User, Loader2 } from 'lucide-react';
+import { Send, Mail, MessageSquare, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
@@ -43,7 +43,7 @@ export default function ContactPage() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

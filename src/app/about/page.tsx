@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Coffee, Code, Zap } from 'lucide-react';
+import { Calendar, MapPin, Coffee } from 'lucide-react';
 
 const timeline = [
   {
@@ -137,7 +137,7 @@ export default function AboutPage() {
         >
           <h2 className="text-3xl font-bold font-heading mb-8 text-center">Timeline</h2>
           <div className="space-y-6">
-            {timeline.map((item, index) => (
+            {timeline.map((item) => (
               <div key={item.year} className="glass-card p-6 relative">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
